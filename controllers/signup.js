@@ -1,11 +1,15 @@
 const signupRoute = (knexInstance, bcrypt) => (req, res) => {
     const { name, email, password } = req.body
+    if (!email || !name || !password) {
+        return res.status(400).json('incorrect form submission')
+    }
     var hash = bcrypt.hashSync(password, 8);
     knexInstance.transaction(trx => {
-        trx.insert({
-            hash,
-            email
-        })
+        trx
+            .insert({
+                hash,
+                email
+            })
             .into('login')
             .returning('email')
             .then(loginEmail => {

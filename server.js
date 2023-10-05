@@ -7,7 +7,7 @@ import knex from 'knex';
 import signupRoute from './controllers/signup.js';
 import signinRoute from './controllers/signin.js';
 import profileRoute from './controllers/profile.js';
-import imageRoute from './controllers/image.js';
+import {image, handleAPI} from './controllers/image.js';
 import usersRoute from './controllers/users.js';
 
 const knexInstance = knex({
@@ -29,7 +29,9 @@ app.get('/', usersRoute(knexInstance));
 app.post('/signin', signinRoute(knexInstance, bcrypt));
 app.post('/signup', signupRoute(knexInstance, bcrypt));
 app.get('/profile/:id', profileRoute(knexInstance));
-app.put('/image', imageRoute(knexInstance));
+app.put('/image', image(knexInstance));
+app.post('/imageurl', (req, res) => handleAPI(req, res));
+
 
 app.listen(3000, () => {
    console.log('server is running on port 3000')
