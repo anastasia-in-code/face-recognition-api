@@ -2,6 +2,22 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import bcrypt from 'bcryptjs'
 import cors from 'cors'
+import knex from 'knex';
+
+const knexInstance = knex({
+   client: 'pg',
+   connection: {
+     host: '127.0.0.1',
+     port: 5433,
+     user: 'postgres',
+     password: '1408',
+     database: 'facerecognizer',
+   },
+ });
+
+ knexInstance.select('*')
+  .from('users')
+  .then(data => console.log(data))
 
 const db = {
    users: [
@@ -49,14 +65,12 @@ app.post('/signin', (req, res) => {
 app.post('/signup', (req, res) => {
    const { name, email, password } = req.body
    var hash = bcrypt.hashSync(password, 8);
-   db.users.push({
-      id: 3,
-      name: name,
-      email: email,
-      password: hash,
-      entries: 0,
+   knexInstance('users').insert({
+      email,
+      name,
       joined_at: new Date()
-   })
+   }).then(data => console.log(data))
+   
    res.send(db.users[db.users.length - 1])
 })
 
