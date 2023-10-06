@@ -1,9 +1,12 @@
 const signinRoute = (knexInstance, bcrypt) => (req, res) => {
     const { email, password } = req.body
+
+    //email and password verification
     if (!email || !password) {
         return res.status(400).json('incorrect form submission')
     }
 
+    //query verifies credentials
     knexInstance.select('email', 'hash').from('login')
         .where('email', '=', email)
         .then(data => {
