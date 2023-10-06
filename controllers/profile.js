@@ -1,5 +1,7 @@
-const profileRoute = ( knexInstance) => (req, res)=> {
+const profileRoute = (knexInstance) => (req, res) => {
     const { id } = req.params
+
+    //guery gets user's data
     knexInstance
         .select('*')
         .from('users')
