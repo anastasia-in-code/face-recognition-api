@@ -27,14 +27,14 @@ const signupRoute = (knexInstance, bcrypt) => (req, res) => {
                             name,
                             joined_at: new Date()
                         })
-                        .then(user => res.send(user[0]))
+                        .then(user => res.json(user[0]))
                 })
                 .then(trx.commit)
                 .catch(trx.rollback)
         })
         .catch(err => {
             console.log(err)
-            res.status(400).send('some error`s happened')
+            res.status(400).json('some error`s happened')
         })
 }
 
