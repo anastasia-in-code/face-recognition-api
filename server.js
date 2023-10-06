@@ -24,7 +24,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //routes 
-app.get('/', usersController(knexInstance));
+app.get('/', (req, res) => {
+   res.json('it`s working')
+})
+// app.get('/', usersController(knexInstance));
 app.post('/signin', signinController(knexInstance, bcrypt));
 app.post('/signup', signupController(knexInstance, bcrypt));
 app.get('/profile/:id', profileController(knexInstance));
