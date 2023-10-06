@@ -12,9 +12,11 @@ const signinRoute = (knexInstance, bcrypt) => (req, res) => {
         .then(data => {
             const isValid = bcrypt.compareSync(password, data[0].hash)
             if (isValid) {
-                return knexInstance.select('*').from('users')
+                return knexInstance
+                    .select('*')
+                    .from('users')
                     .where('email', '=', email)
-                    .then(user => res.json(user[0]))
+                    .then(user => res.send(user[0]))
                     .catch(err => res.status(400).json('some error`s happened'))
             }
         })

@@ -7,6 +7,7 @@ const DB_USER = process.env.DB_USER
 const DB_PASSWORD = process.env.DB_PASSWORD
 const DB_NAME = process.env.DB_NAME
 
+//initializing knex instance for db connection
 const knexInstance = knex({
     client: 'pg',
     connection: {
@@ -17,7 +18,6 @@ const knexInstance = knex({
     },
 });
 
-//initializing knex instance for db connection
 // const knexInstance = knex({
 //     client: 'pg',
 //     connection: {
@@ -28,13 +28,5 @@ const knexInstance = knex({
 //         database: DB_NAME,
 //     },
 // });
-
-// const knexInstance = knex({
-//         client: 'pg',
-//         connectionS: {
-//             connectionString: process.env.DATABASE_URL,
-//             ssl: false
-//         },
-//     });
 
 export default knexInstance
