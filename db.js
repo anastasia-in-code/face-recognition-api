@@ -21,8 +21,8 @@ const DB_NAME = process.env.DB_NAME
 
 const knexInstance = knex({
         client: 'pg',
-        connection: {
-            host: process.env.DATABASE_URL,
+        connectionS: {
+            connectionString: process.env.DATABASE_URL,
             ssl: true
         },
     });
