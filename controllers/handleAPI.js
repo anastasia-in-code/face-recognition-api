@@ -2,10 +2,10 @@
 const handleAPI = (req, res) => {
 
     //Clarifai API credentials and settings
-    const PAT = process.env.PAT;
-    const USER_ID = process.env.USER_ID;
-    const APP_ID = process.env.APP_ID;
-    const MODEL_ID = process.env.MODEL_ID;
+    const PAT = '59957ad270a74bb4afc51ff8ccf418a3';
+    const USER_ID = 'anastasiia_unicorn';
+    const APP_ID = 'facerecof1408';
+    const MODEL_ID = 'face-detection';
     const IMAGE_URL = req.body.input
 
     //request body construction
