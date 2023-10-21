@@ -1,10 +1,19 @@
 const signupRoute = (knexInstance, bcrypt) => (req, res) => {
     const { name, email, password } = req.body
 
-    //email, name, and password verification
-    if (!email || !name || !password) {
+    //email, name, and password validation
+    if (!email 
+        || !name 
+        || !password 
+        || !email.includes('@') 
+        || !email.includes('.') 
+        || name.length < 3
+        || email.length < 5
+        || password.length < 6
+        ) {
         return res.status(400).json('incorrect form submission')
     }
+
 
     //hash password before store
     var hash = bcrypt.hashSync(password, 8);
