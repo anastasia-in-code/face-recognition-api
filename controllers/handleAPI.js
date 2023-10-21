@@ -1,5 +1,6 @@
 //controller sends request on outer API that provides AI services
 const handleAPI = (req, res) => {
+    if(!req.body.input) res.status(400).json('URL can not be empty')
 
     //Clarifai API credentials and settings
     const PAT = '59957ad270a74bb4afc51ff8ccf418a3';

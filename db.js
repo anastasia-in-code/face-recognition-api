@@ -18,6 +18,7 @@ const knexInstance = knex({
     },
 });
 
+// dev
 // const knexInstance = knex({
 //     client: 'pg',
 //     connection: {
