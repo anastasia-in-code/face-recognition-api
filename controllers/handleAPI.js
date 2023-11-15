@@ -1,6 +1,6 @@
 //controller sends request on outer API that provides AI services
-const handleAPI = (req, res) => {
-    if(!req.body.input) res.status(400).json('URL can not be empty')
+const handleAPI = async (req, res) => {
+    if (!req.body.input) return res.status(400).json('URL can not be empty')
 
     //Clarifai API credentials and settings
     const PAT = '59957ad270a74bb4afc51ff8ccf418a3';
@@ -37,10 +37,14 @@ const handleAPI = (req, res) => {
     };
 
     //request to API
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
-        .then(response => response.json())
-        .then(data => res.json(data))
-        .catch(error => res.status(400).json('unable to work with API'))
+    try {
+        const response = await fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
+        const result = await response.json()
+        return  res.json(result)
+    } catch (error) {
+        return res.status(500)
+    }
+
 }
 
 export default handleAPI
